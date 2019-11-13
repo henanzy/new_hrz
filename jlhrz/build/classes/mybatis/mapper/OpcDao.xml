@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnzy.hot.dao.OpcDao">
+	<resultMap id="Map" type="java.util.HashMap"></resultMap>
+	                                            
+	<insert id="insertHistory" >
+	insert into history
+		(hrz,ycssgll,ycssgrl,ycljgll,ycljgrl,ycgsyl,ycgswd,ychsyl,
+		ychswd,bbssll,bbljll,sxyw,zlszbsl,zdl,Ady,Bdy,Cdy,Adl,Bdl,Cdl,ecgssll,ecgljll,
+		ecgsyl,ecgswd,echsyl,echswd,eccwhyl,snwd,xhb1fk,xhb2fk,bsb1fk,bsb2fk,tjfkdfk,time)
+		
+		values(#{hrz},#{ycssgll},#{ycssgrl},#{ycljgll},#{ycljgrl},#{ycgsyl},#{ycgswd},
+		#{ychsyl},#{ychswd},#{bbssll},#{bbljll},#{sxyw},#{zlszbsl},#{zdl},#{Ady},#{Bdy},#{Cdy},
+		#{Adl},#{Bdl},#{Cdl},#{ecgssll},#{ecgljll},#{ecgsyl},#{ecgswd},#{echsyl},#{echswd},#{eccwhyl},
+		#{snwd},#{xhb1fk},#{xhb2fk},#{bsb1fk},#{bsb2fk},#{tjfkdfk},#{time}
+		)
+	</insert>
+	
+	<insert id="insertRbb" >
+	insert into rbb
+		(hrz,ycssgll,ycssgrl,ycljgll,ycljgrl,ycgsyl,ycgswd,ychsyl,
+		ychswd,bbssll,bbljll,sxyw,zlszbsl,zdl,Ady,Bdy,Cdy,Adl,Bdl,Cdl,ecgssll,ecgljll,
+		ecgsyl,ecgswd,echsyl,echswd,eccwhyl,snwd,xhb1fk,xhb2fk,bsb1fk,bsb2fk,tjfkdfk,time)
+		
+		values(#{hrz},#{ycssgll},#{ycssgrl},#{ycljgll},#{ycljgrl},#{ycgsyl},#{ycgswd},
+		#{ychsyl},#{ychswd},#{bbssll},#{bbljll},#{sxyw},#{zlszbsl},#{zdl},#{Ady},#{Bdy},#{Cdy},
+		#{Adl},#{Bdl},#{Cdl},#{ecgssll},#{ecgljll},#{ecgsyl},#{ecgswd},#{echsyl},#{echswd},#{eccwhyl},
+		#{snwd},#{xhb1fk},#{xhb2fk},#{bsb1fk},#{bsb2fk},#{tjfkdfk},#{time}
+		)
+	</insert>
+	
+	<insert id="insertZybb" >
+	insert into zybb
+		(hrz,ycssgll,ycssgrl,ycljgll,ycljgrl,ycgsyl,ycgswd,ychsyl,
+		ychswd,bbssll,bbljll,sxyw,zlszbsl,zdl,Ady,Bdy,Cdy,Adl,Bdl,Cdl,ecgssll,ecgljll,
+		ecgsyl,ecgswd,echsyl,echswd,eccwhyl,snwd,xhb1fk,xhb2fk,bsb1fk,bsb2fk,tjfkdfk,time)
+		
+		values(#{hrz},#{ycssgll},#{ycssgrl},#{ycljgll},#{ycljgrl},#{ycgsyl},#{ycgswd},
+		#{ychsyl},#{ychswd},#{bbssll},#{bbljll},#{sxyw},#{zlszbsl},#{zdl},#{Ady},#{Bdy},#{Cdy},
+		#{Adl},#{Bdl},#{Cdl},#{ecgssll},#{ecgljll},#{ecgsyl},#{ecgswd},#{echsyl},#{echswd},#{eccwhyl},
+		#{snwd},#{xhb1fk},#{xhb2fk},#{bsb1fk},#{bsb2fk},#{tjfkdfk},#{time}
+		)
+	</insert>
+	
+	<select id="selHistory" resultMap="Map">
+		select * from history where 1=1
+		<if test="startTime!=null and startTime!=''">
+			and time &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and time &lt;=#{endTime}
+		</if>
+		<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
+	</select>
+	
+	<select id="selrbb" resultMap="Map">
+		select * from rbb where 1=1
+		<if test="startTime!=null and startTime!=''">
+			and time &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and time &lt;=#{endTime}
+		</if>
+		<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
+	</select>
+	
+	<select id="selzybb" resultMap="Map">
+		select * from zybb where 1=1
+		<if test="startTime!=null and startTime!=''">
+			and time &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and time &lt;=#{endTime}
+		</if>
+		<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
+	</select>
+	
+	<select id="selQx" resultMap="Map">
+		select * from ( select top 20 * from rbb a where 1=1 
+		<if test="hrz!=null and hrz!=''">
+			and a.hrz =#{hrz}
+		</if>
+		 order by a.time desc) s 
+		
+		order by  s.time asc
+	</select>
+	
+	<select id="getHrzXx" resultMap="Map">
+		select * from hrzXx where 1=1
+	<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
+	</select>
+	
+	<insert id="Insert" >
+		insert into hrzXx
+		(hrz,gsdd,zlmc,grqy,Kxs,shejimj,shijimj,dz,bgsj,rbdz,lxr,rblx)
+		values(#{hrz},#{gsdd},#{zlmc},#{grqy},#{Kxs},#{shejimj},#{shijimj},#{dz},#{bgsj},#{rbdz},#{lxr},#{rblx})
+	</insert>
+	
+	<update id="Update">
+		update hrzXx set
+		gsdd=#{gsdd},zlmc=#{zlmc},grqy=#{grqy},Kxs=#{Kxs},shejimj=#{shejimj},shijimj=#{shijimj} ,dz=#{dz},
+		bgsj=#{bgsj},rbdz=#{rbdz},lxr=#{lxr},rblx=#{rblx}
+		where id=#{id}
+	</update>
+	
+	<delete id="Delete" >
+		delete from hrzXx
+		where
+		id=#{id}
+	</delete>
+	
+	<insert id="InsertBjxx" >
+		insert into bjxx
+		(bjsj,bjlx,hrz)
+		values(#{bjsj},#{bjlx},#{hrz})
+	</insert>
+	
+	<insert id="InsertBjdl" >
+		insert into bjdl
+		(bjlx,hrz)
+		values(#{bjlx},#{hrz})
+	</insert>
+	
+	<delete id="DeleteBjdl" >
+		delete from bjdl
+		where
+		hrz=#{hrz} and bjlx=#{bjlx}
+	</delete>
+	
+	<update id="UpdateBjxx" >
+		update bjxx set jcsj=#{jcsj} where hrz=#{hrz} and bjlx=#{bjlx} and jcsj is null;
+	</update>
+	
+	<select id="pdbj" resultType="java.lang.Integer">
+		select count(*) from bjxx where hrz=#{hrz} and bjlx=#{bjlx} and jcsj is null;	
+	</select>
+	
+	<select id="getbjdl" resultType="java.lang.String">
+		select bjlx from bjdl 	where hrz=#{hrz}
+	</select>
+	
+	<select id="getbjxx" resultMap="Map">
+		select * from bjxx where  jcsj is null order by bjsj desc	
+	</select>
+	
+	<select id="getlsbjxx" resultMap="Map">
+		select * from bjxx where  jcsj is not null
+		
+		<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
+		<if test="startTime!=null and startTime!=''">
+			and bjsj &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and bjsj &lt;=#{endTime}
+		</if>
+		order by bjsj desc
+	</select>
+	<select id="dbjc" resultMap="Map">
+		select h.ycssgrl ,h.ycssgll,h.ycgswd,h.ychswd,h.ycljgrl,h.ycljgll,h.time,x.gsdd,x.lxr,x.rbdz,x.rblx,x.hrz from rbb h,hrzXx x where h.hrz=x.hrz
+		
+		<if test="hrz!=null and hrz!=''">
+			and h. hrz =#{hrz}
+		</if>
+		<if test="startTime!=null and startTime!=''">
+			and h.time &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and h.time &lt;=#{endTime}
+		</if>
+		order by h.time desc
+	</select>
+
+
+<select id="sdrfx" resultMap="Map">
+		select hrz, ROUND(MAX(convert(float,ycljgll))-MIN(convert(float,ycljgll)),2)  as ljll,ROUND(MAX(convert(float,ycljgrl))-MIN(convert(float,ycljgrl)),2)  as ljrl
+,ROUND(MAX(convert(float,zlszbsl))-MIN(convert(float,zlszbsl)),2)  as zysl ,ROUND(MAX(convert(float,zdl))-MIN(convert(float,zdl)),2)  as zydl
+from history where 1=1
+		<if test="hrz!=null and hrz!=''">
+			and hrz =#{hrz}
+		</if>
+		<if test="startTime!=null and startTime!=''">
+			and time &gt;= #{startTime}
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			and time &lt;=#{endTime}
+		</if>
+		group by hrz
+	</select>
+<update id="updateSsb" >
+	update ssb set
+		ycssgll =#{ycssgll},ycssgrl=#{ycssgrl},ycljgll=#{ycljgll},ycljgrl=#{ycljgrl},ycgsyl=#{ycgsyl},ycgswd=#{ycgswd},ychsyl=#{ychsyl},
+		ychswd=#{ychswd},bbssll=#{bbssll},bbljll=#{bbljll},sxyw=#{sxyw},zlszbsl=#{zlszbsl},zdl=#{zdl},Ady=#{Ady},
+		Bdy=#{Bdy},Cdy=#{Cdy},Adl=#{Adl},Bdl=#{Bdl},Cdl=#{Cdl},ecgssll=#{ecgssll},ecgljll=#{ecgljll},
+		ecgsyl=#{ecgsyl},ecgswd=#{ecgswd},echsyl=#{echsyl},echswd=#{echswd},eccwhyl=#{eccwhyl},snwd=#{snwd},xhb1fk=#{xhb1fk},xhb2fk=#{xhb2fk},bsb1fk=#{bsb1fk},
+		bsb2fk=#{bsb2fk},tjfkdfk=#{tjfkdfk} ,time=#{time} where hrz=#{hrz}		
+	</update>
+<update id="updateXsj" >
+	update xsj set
+		ycgsylsx =#{ycgsylsx},ycgsylxx=#{ycgsylxx},ycgswdsx=#{ycgswdsx} ,ycgswdxx=#{ycgswdxx} ,ychsylsx=#{ychsylsx},ychsylxx=#{ychsylxx},ychswdsx=#{ychswdsx},
+		ychswdxx=#{ychswdxx},ecgsylsx=#{ecgsylsx},ecgsylxx=#{ecgsylxx},ecgswdsx=#{ecgswdsx},ecgswdxx=#{ecgswdxx},echswdsx=#{echswdsx},echswdxx=#{echswdxx},echsylsx=#{echsylsx},echsylxx=#{echsylxx},
+		ywsx=#{ywsx},ywxx=#{ywxx},dyjbjcz=#{dyjbjcz},echswdsdz=#{echswdsdz},ecgsylsdz=#{ecgsylsdz},echsylsdz=#{echsylsdz},echsbsylsx=#{echsbsylsx},echsbsylxx=#{echsbsylxx},kqtjfsj=#{kqtjfsj},gbtjfsj=#{gbtjfsj},
+		qdgpbsbpl=#{qdgpbsbpl},qgpbsbsj=#{qgpbsbsj},xyylsx=#{xyylsx},xyylxx=#{xyylxx},echstjyl=#{echstjyl},ywxxx=#{ywxxx},tzgpbsbpl=#{tzgpbsbpl},
+		tzgpbsbsj=#{tzgpbsbsj},tjfzdkd=#{tjfzdkd},bcwd1=#{bcwd1},bcwd2=#{bcwd2},bcwd3=#{bcwd3},bcwd4=#{bcwd4},ecgswd1=#{ecgswd1},ecgswd2=#{ecgswd2},ecgswd3=#{ecgswd3},
+		ecgswd4=#{ecgswd4},ecgswd5=#{ecgswd5},ecgswd6=#{ecgswd6},ecgswd7=#{ecgswd7},ecgswd8=#{ecgswd8},sjdf1=#{sjdf1},sjdf2=#{sjdf2},sjdf3=#{sjdf3},
+		sjdf4=#{sjdf4},sjds1=#{sjds1},sjds2=#{sjds2},sjds3=#{sjds3},sjds4=#{sjds4},swwd1=#{swwd1},swwd2=#{swwd2},swwd3=#{swwd3},fmkdsd=#{fmkdsd},
+		swwd4=#{swwd4},swwd5=#{swwd5},swwd6=#{swwd6},swwd7=#{swwd7},swwd8=#{swwd8} ,time=#{time} where hrz=#{hrz}		
+</update>
+<update id="updateXsj_zt" >
+	update xsj set
+		 dzt_bsb1ycjd=#{dzt_bsb1ycjd},dzt_bsb2ycjd=#{dzt_bsb2ycjd},dzt_lnb1ycjd=#{dzt_lnb1ycjd},dzt_tjfycjd=#{dzt_tjfycjd},
+		 dzt_xyfycjd=#{dzt_xyfycjd},dzt_xhb1ycjd=#{dzt_xhb1ycjd},dzt_xhb2ycjd=#{dzt_xhb2ycjd},dzt_zlsfycjd=#{dzt_zlsfycjd},dzt_xyfzt=#{dzt_xyfzt},
+		 dzt_zlsfzt=#{dzt_zlsfzt},xzt_bsb1qz=#{xzt_bsb1qz},xzt_bsb2qz=#{xzt_bsb2qz},xzt_bsbkzfs=#{xzt_bsbkzfs},xzt_xztecgswdsdfs=#{xzt_xztecgswdsdfs},xzt_lnb1qz=#{xzt_lnb1qz},xzt_lnb2qz=#{xzt_lnb2qz},xzt_lnfqz=#{xzt_lnfqz},xzt_tjfdskgsn=#{xzt_tjfdskgsn},
+		 xzt_tjfqz=#{xzt_tjfqz},xzt_xyfqz=#{xzt_xyfqz},xzt_xhb1qz=#{xzt_xhb1qz}, xzt_xhb2qz=#{xzt_xhb2qz},xzt_zlsfqz=#{xzt_zlsfqz}
+		 where hrz=#{hrz}		
+</update>	
+<select id="findSsb" resultMap="Map">
+select * from ssb
+<if test="hrz!=null and hrz!=''">
+			 where hrz=#{hrz}	
+</if>
+</select>	
+
+<select id="findXsj" resultMap="Map">
+select * from xsj
+<if test="hrz!=null and hrz!=''">
+			 where hrz=#{hrz}	
+</if>
+</select>		
+</mapper>

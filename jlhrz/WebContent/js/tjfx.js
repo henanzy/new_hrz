@@ -28,7 +28,7 @@ function getRootPath(){
 $(function () {
 	var date = new Date();
 	$("#endTime").val(date.format('yyyy-MM-dd'));
-	date.setTime(date .getTime() - 1000*60*60*24*7);
+	/*date.setTime(date .getTime() - 1000*60*60*24*7);*/
 
 	$("#startTime").val(date.format('yyyy-MM-dd'));
 	lsqx();
@@ -202,6 +202,10 @@ $(function () {
 		        }
 		    };
 		var dataList=[];
+		var dateStr = $("#endTime").val()
+		 var timeTamp = new Date(dateStr).getTime();
+		   var date = new Date();
+		   date.setTime(timeTamp + 1000*60*60*24);
 		$.ajax({
 			url : getRootPath()+"/user/selHistory.action", 
 			async : false,
@@ -209,7 +213,7 @@ $(function () {
 			data : {
 				"hrz":$("#hrz").val(),
 				"startTime":$("#startTime").val(),
-				"endTime":$("#endTime").val(),
+				"endTime":date.format('yyyy-MM-dd'),
 			},
 			success : function(data) {
 				
@@ -260,24 +264,35 @@ function onewd(options,xqdata,con,time){
 			tickInterval: 10,
 			labels: {
 			    formatter:function(){
-			     return this.value.substring(0,10);
+			     return this.value;
 			    }
 			  }
 		};
+	options.yAxis= [{
+ 		min: 0,
+ 		title: {
+ 			text: '温度'
+ 		},opposite: true
+ 	},{
+ 		min: 0,
+ 		title: {
+ 			text: '压力'
+ 		}
+ 	}],
 	options.series = [];
 	 options.series.push({
 		 name:"室内温度",
 		 data:xqdata.snwd,
 		 tooltip : {
 				valueSuffix : '℃'
-			}	,marker: {
+			}	, yAxis : 0,marker: {
 
 	             enabled: false,
 	         },		 
 	 });
 			 options.series.push({
 				 name:"一次回水压力",
-				 data:xqdata.ychsyl,
+				 data:xqdata.ychsyl,yAxis : 1,
 				 tooltip : {
 						valueSuffix : 'Mpa'
 					}	,marker: {
@@ -288,7 +303,7 @@ function onewd(options,xqdata,con,time){
 			 
 			 options.series.push({
 				 name:"一次回水温度",
-				 data:xqdata.ychswd,
+				 data:xqdata.ychswd,yAxis : 0,
 				 tooltip : {
 						valueSuffix : '℃'
 					}	,marker: {
@@ -298,7 +313,7 @@ function onewd(options,xqdata,con,time){
 			 });
 			  options.series.push({                       
 				 name:"一次供水压力",
-				 data:xqdata.ycgsyl,
+				 data:xqdata.ycgsyl,yAxis : 1,
 				 tooltip : {
 						valueSuffix : 'Mpa'
 					}	,marker: {
@@ -308,7 +323,7 @@ function onewd(options,xqdata,con,time){
 			 });
 			  options.series.push({                       
 					 name:"一次供水温度",
-					 data:xqdata.ycgswd,
+					 data:xqdata.ycgswd,yAxis : 0,
 					 tooltip : {
 							valueSuffix : '℃'
 						}	,marker: {
@@ -318,7 +333,7 @@ function onewd(options,xqdata,con,time){
 				 });
 			options.series.push({
 				 name:"二次供水压力",
-				 data:xqdata.ecgsyl,
+				 data:xqdata.ecgsyl,yAxis : 1,
 				 tooltip : {
 						valueSuffix : 'Mpa'
 					}	,marker: {
@@ -329,7 +344,7 @@ function onewd(options,xqdata,con,time){
 			 
 			 options.series.push({
 				 name:"二次供水温度",
-				 data:xqdata.ecgswd,
+				 data:xqdata.ecgswd,yAxis : 0,
 				 tooltip : {
 						valueSuffix : '℃'
 					}	,marker: {
@@ -340,7 +355,7 @@ function onewd(options,xqdata,con,time){
 
 			 options.series.push({
 				 name:"二次回水压力",
-				 data:xqdata.echsyl,
+				 data:xqdata.echsyl,yAxis : 1,
 				 tooltip : {
 						valueSuffix : 'Mpa'
 					}	,marker: {
@@ -351,7 +366,7 @@ function onewd(options,xqdata,con,time){
 			 
 			 options.series.push({
 				 name:"二次回水温度",
-				 data:xqdata.echswd,
+				 data:xqdata.echswd,yAxis : 0,
 				 tooltip : {
 						valueSuffix : '℃'
 					}	,marker: {

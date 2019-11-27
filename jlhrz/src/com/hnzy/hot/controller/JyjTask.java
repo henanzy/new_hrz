@@ -108,7 +108,7 @@ public class JyjTask{
 						            	if(b==false){
 						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
-						                  String s=String.format("%.1f",value);
+						                  String s=String.format("%.2f",value);
 						                  dmap.put(key, s);
 								} catch (JIException e) {
 									// TODO Auto-generated catch block
@@ -200,7 +200,7 @@ public class JyjTask{
 						            	if(b==false){
 						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
-						                  String s=String.format("%.1f",value);
+						                  String s=String.format("%.2f",value);
 						                  dmap.put(key, s);
 								} catch (JIException e) {
 									// TODO Auto-generated catch block
@@ -293,7 +293,7 @@ public class JyjTask{
 						            	if(b==false){
 						            		value = temp.getValue().read(true).getValue().getObject();
 						            	}
-						                  String s=String.format("%.1f",value);
+						                  String s=String.format("%.2f",value);
 						                  dmap.put(key, s);
 								} catch (JIException e) {
 									// TODO Auto-generated catch block
@@ -545,7 +545,7 @@ public class JyjTask{
 							            	if(b==false){
 							            		value = temp.getValue().read(true).getValue().getObject();
 							            	}
-							                  String s=String.format("%.1f",value);
+							                  String s=String.format("%.2f",value);
 							                  dmap.put(key, s);
 									} catch (JIException e) {
 										// TODO Auto-generated catch block
@@ -636,7 +636,7 @@ public class JyjTask{
 							            	if(b==false){
 							            		value = temp.getValue().read(true).getValue().getObject();
 							            	}
-							                  String s=String.format("%.1f",value);
+							                  String s=String.format("%.2f",value);
 							                  dmap.put(key, s);
 									} catch (JIException e) {
 										// TODO Auto-generated catch block
@@ -727,7 +727,7 @@ public class JyjTask{
 							            	if(b==false){
 							            		value = temp.getValue().read(true).getValue().getObject();
 							            	}
-							                  String s=String.format("%.1f",value);
+							                  String s=String.format("%.2f",value);
 							                  dmap.put(key, s);
 									} catch (JIException e) {
 										// TODO Auto-generated catch block

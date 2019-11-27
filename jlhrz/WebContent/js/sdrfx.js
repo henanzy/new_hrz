@@ -461,7 +461,7 @@ function compareWord(compareWordList){
 		hjrl=hjrl+json[i].ljrl;
 	};
 	var arr=["合计",hjdl,hjsl,hjll,hjrl];
-	xinwordList.push(arr);
+	compareWordList.push(arr);
 }	
 
 //表格写入函数

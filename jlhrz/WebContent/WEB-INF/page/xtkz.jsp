@@ -905,6 +905,8 @@ function showBsb(flag){
 	
 	<div style="width:7%;height:4%;  position: absolute;left: 17.5%;top: 3%" >
 	<span style="color:red;font-size:15px;">调节阀</span>
+	<br/>
+	<span id="kaidu" style="color:red;font-size:15px;"></span>
 	</div>
 	
 	<div style="width:12%;height:4%;  position: absolute;left: 5%;top: 17%" >
@@ -1109,7 +1111,7 @@ function hrz(){
 		},
 		success:function(data){
 			var map=data.list[0];
-			
+			$("#kaidu").html("开度："+map.tjfkdfk);
 			$("#ycgsssll").html(map.ycssgll);
 			$("#ycgsssrl").html(map.ycssgrl);
 			$("#ycgsljll").html(map.ycljgll);
